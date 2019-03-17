@@ -1,0 +1,85 @@
+.m-content {
+    min-height: 100vh;
+    background: white;
+    padding: 0px 0px;
+}
+
+.m-header {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    transition: opacity 1s all;
+}
+
+.m-header.fadeOut {
+    opacity: 0.4;
+}
+
+.m-nav {
+    padding: 0 1rem;
+}
+
+.m-nav .navbar-brand,
+.m-nav .navbar-text {
+    padding: 0.8rem 1rem;
+}
+
+.m-nav .navbar-nav .nav-link {
+    padding: 1rem 1rem;
+}
+
+.m-nav .nav-item.active .nav-link,
+.m-nav .nav-item:hover .nav-link {
+    color: rgba(0, 0, 0, .9);
+    background-color: rgb(238, 239, 240);
+}
+
+.m-nav .navbar-brand {
+    color: rgba(0, 0, 0, .5);
+}
+
+.m-nav .navbar-nav>li.dropdown:hover>a,
+.m-nav .navbar-nav>li.dropdown:hover>a:hover,
+.m-nav .navbar-nav>li.dropdown:hover>a:focus {
+    background-color: rgb(231, 231, 231);
+    color: rgb(85, 85, 85);
+}
+
+.m-nav .dropdown-menu {
+    margin-top: 0px;
+    border-radius: 0px;
+    left: -70px;
+}
+
+li.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.m-box,
+.m-box-left,
+.m-box-right {
+    min-height: 800px;
+}
+
+.m-box-right {
+    padding-right: 0px;
+}
+
+.m-box-left {
+    padding-left: 0px;
+}
+
+.m-box-right .card-header {
+    font-size: 1.10rem;
+}
+
+.m-box-right .card-header .svg-inline--fa.fa-w-16 {
+    width: 0.80em;
+}
+
+.m-box-right .card-header .svg-inline--fa {
+    height: 0.80em;
+    vertical-align: -0.05em;
+}
