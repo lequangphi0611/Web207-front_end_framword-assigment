@@ -83,3 +83,26 @@ li.dropdown:hover>.dropdown-menu {
     height: 0.80em;
     vertical-align: -0.05em;
 }
+
+.my-list a {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.my-list .list-group-item {
+    transition: background 0.5s;
+}
+
+.my-list .list-group-item:hover {
+    background: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+
+/* md reposive */
+
+@media (max-width: 768px) {
+    .m-header {
+        height: 200px;
+    }
+}
