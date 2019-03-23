@@ -67,10 +67,6 @@ li.dropdown:hover>.dropdown-menu {
     padding-right: 0px;
 }
 
-.m-box-left {
-    padding-left: 0px;
-}
-
 .m-box-right .card-header {
     font-size: 1.10rem;
 }
@@ -96,6 +92,10 @@ li.dropdown:hover>.dropdown-menu {
 .my-list .list-group-item:hover {
     background: rgb(230, 230, 230);
     cursor: pointer;
+}
+
+.test-question-body h6 {
+    padding-bottom: 1.25rem;
 }
 
 
