@@ -1,11 +1,11 @@
 .m-content {
-    min-height: 100vh;
+    /* min-height: 30vh; */
     background: white;
     padding: 0px 0px;
 }
 
 .m-header {
-    height: 400px;
+    height: 350px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -96,6 +96,10 @@ li.dropdown:hover>.dropdown-menu {
 
 .test-question-body h6 {
     padding-bottom: 1.25rem;
+}
+
+footer {
+    background: #eeeeee;
 }
 
 
