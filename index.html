@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="mApp">
 
 <head>
     <title>Philqpd02256</title>
@@ -18,49 +18,14 @@
     <link rel="stylesheet" href="css/myStyle.css">
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
     <div class="container col-xl-10 col-12 col-12 m-content w-100">
-
         <!-- header -->
         <header class="m-header">
         </header>
-        <!-- Menu -->
-        <nav class="navbar navbar-expand-md navbar-light bg-light col-12 m-nav">
-            <a class="navbar-brand" href="#">FPT Polytechnic</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
-                    <li class="nav-item">
-                        <a class="nav-link align-middle" href="#">Giới thiệu <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Liên hệ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Góp ý</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hỏi đáp</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mt-2 mt-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài khoản</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">Đăng ký</a>
-                            <a class="dropdown-item" href="#">Đăng nhập</a>
-                            <a class="dropdown-item" href="#">Quên mật khẩu</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
-                            <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                            <a class="dropdown-item" href="#">Cập nhật tài khoản</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+
+
+        <menu class="p-0"></menu>
 
         <!-- Content -->
         <div class="col-12 mt-4 m-box">
@@ -137,54 +102,9 @@
                 </div>
 
                 <!-- content right -->
-                <div class="col-3  m-box-right">
+                <div class="col-3  m-box-right mb-4">
 
-                    <!-- List -->
-                    <div class="card">
-                        <div class="card-header font-weight-bold">
-                            <i class="fas fa-th-list"></i> Danh mục
-                        </div>
-                        <ul class="list-group list-group-flush my-list">
-                            <li class="list-group-item">
-                                <a href="#">
-                                        Kiểm thử và triển khai
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">SQL Server</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Điện toán đám mây</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Lập trình PHP</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Lập trình Android nâng cao</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Lập trình Android cơ bản</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Thiết kế layout</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Thiết kế giao diện trên Android</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Quản lý dự án với Agile</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Intenet Maketing</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Lập trình hướng đối tượng với Java</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Lập trình ASP.NET</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <side-bar class="p-0"></side-bar>
 
                 </div>
 
@@ -217,6 +137,10 @@
     <script src="js/angular.min.js"></script>
     <!-- App AngularJS -->
     <script src="js/app.js"></script>
+
+    <!-- component -->
+    <script src="/component/menu/menuComponent.js"></script>
+    <script src="/component/sidebar/sidebarController.js"></script>
 </body>
 
 </html>

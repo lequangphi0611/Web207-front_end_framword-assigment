@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header font-weight-bold">
+        <i class="fas fa-th-list"></i> Danh mục
+    </div>
+    <ul class="list-group list-group-flush my-list">
+        <li class="list-group-item" ng-repeat='subject in ctrl.subjects | orderBy: "Name"'>
+            <a href="#">
+                       {{subject.Name}}
+                </a>
+        </li>
+    </ul>
+</div>
