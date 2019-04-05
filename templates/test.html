@@ -1,35 +1,85 @@
-<!-- Test -->
-<div class="card">
-    <div class="card-header text-uppercase font-weight-bold">
-        <i class="fas fa-th-list"></i> xây dựng trang web
-    </div>
-    <div class="card-body test-question-body">
-        <h6 class="card-title border-bottom">
-            <b>1. </b> Trong kỹ thuật chỉnh nâng cao có những kỹ thuật nào
-        </h6>
-        <p class="card-text">
-            <form>
-                <div class="custom-control custom-radio mb-2">
-                    <input type="radio" class="custom-control-input" id="answer1" name="answer">
-                    <label class="custom-control-label" for="answer1">Answers 1</label>
-                </div>
-                <div class="custom-control custom-radio mb-2">
-                    <input type="radio" class="custom-control-input" id="answer2" name="answer">
-                    <label class="custom-control-label" for="answer2">Answers 2</label>
-                </div>
-                <div class="custom-control custom-radio mb-2">
-                    <input type="radio" class="custom-control-input" id="answer3" name="answer">
-                    <label class="custom-control-label" for="answer3">Answers 3</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="answer4" name="answer">
-                    <label class="custom-control-label" for="answer4">Answers 4</label>
-                </div>
-            </form>
+<!doctype html>
+<html lang="en" ng-app="mApp">
 
-        </p>
+<head>
+    <title>{{title}}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- logo -->
+    <link rel="shortcut icon" type="image/x-icon" href="/logofpt.ico" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+
+    <!-- my style -->
+    <link rel="stylesheet" href="/css/myStyle.css">
+</head>
+
+<body ng-controller="mainCtrl">
+    <div class="container col-xl-10 col-12 col-12 m-content w-100">
+        <!-- header -->
+        <header class="m-header">
+        </header>
+
+
+        <menu class="p-0 m-0"></menu>
+
+        <!-- Content -->
+        <div class="col-12 mt-4 m-box">
+            <div class="row">
+
+                <!-- content left -->
+                <div class="container col-9 m-box-left">
+
+                    <quizs-content></quizs-content>
+
+                </div>
+
+                <!-- content right -->
+                <div class="col-3  m-box-right mb-4">
+
+                    <side-bar class="p-0"></side-bar>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer class="page-footer font-small">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2018 Copyright: Quang Phi
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
     </div>
-    <div class="card-footer text-muted text-uppercase">
-        mark: 0/100
-    </div>
-</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/all.min.js"></script>
+
+    <!-- My JS -->
+    <script src="/js/silders.js"></script>
+
+    <!-- Angular JS -->
+    <script src="/js/angular.min.js"></script>
+    <!-- App AngularJS -->
+    <script src="/js/app.js"></script>
+
+    <!-- component -->
+    <script src="/component/menu/menuComponent.js"></script>
+    <script src="/component/sidebar/sidebarCombonent.js"></script>
+
+    <script src="/component/content/quizs/quizComponent.js"></script>
+</body>
+
+</html>

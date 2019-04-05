@@ -1,3 +1,3 @@
 app.component('menu', {
-    templateUrl: "component/menu/menuTemplate.html"
+    templateUrl: "/component/menu/menuTemplate.html"
 });

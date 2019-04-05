@@ -2,7 +2,7 @@
 
 const header = document.getElementsByClassName('m-header')[0];
 
-const containImg = "img";
+const containImg = "/img";
 // img URL
 const imgUrls = [
     `${containImg}/head.jpeg`,

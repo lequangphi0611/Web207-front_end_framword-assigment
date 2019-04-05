@@ -1,24 +1,16 @@
 var app = angular.module("mApp", []);
 
-// SUBJECT SERVICE
-app.factory('SubjectService', ['$http', async function SubjectService($http) {
+app.controller("mainCtrl", async($rootScope, $scope, $http) => {
 
-    var getAll = async function() {
-        let subjects;
+    $rootScope.title = "Trang chủ";
 
-        await $http.get("/db/Subjects.js").then(response => {
-            subjects = response.data;
+    $rootScope.getQuestionBySubjectId = async(id) => {
+
+        await $http.get(`/db/Quizs/${id}.js`).then(response => {
+            $rootScope.questions = response.data;
         });
 
-        return subjects;
-    }
-
-    return {
-        getAll: getAll()
-    }
-}]);
-
-app.controller("mainCtrl", async($rootScope, $scope, SubjectService, $http) => {
+    };
 
 
 });
