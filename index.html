@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- logo -->
-    <link rel="shortcut icon" type="image/x-icon" href="logofpt.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/logofpt.ico" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
 
     <!-- my style -->
-    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="/css/myStyle.css">
 </head>
 
 <body ng-controller="mainCtrl">
@@ -23,7 +23,6 @@
         <!-- header -->
         <header class="m-header">
         </header>
-
 
         <menu class="p-0 m-0"></menu>
 
@@ -33,79 +32,12 @@
 
                 <!-- content left -->
                 <div class="container col-9 m-box-left">
-                    <div class="row">
-                        <div class="col mb-lg-4 mb-3">
-                            <div class="card">
-                                <div class="card-body d-flex justify-content-center">
-                                    <img src="img/subjects/ADAV.jpg" alt="">
-                                </div>
-                                <div class="card-footer text-center">
-                                    Lập trình Android nâng cao
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-lg-4 mb-3">
-                            <div class="card">
-                                <div class="card-body d-flex justify-content-center">
-                                    <img src="img/subjects/WEBU.jpg" alt="">
-                                </div>
-                                <div class="card-footer text-center">
-                                    Xây dựng trang Web
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-lg-4 mb-3">
-                            <div class="card">
-                                <div class="card-body d-flex justify-content-center">
-                                    <img src="img/subjects/ADAV.jpg" alt="">
-                                </div>
-                                <div class="card-footer text-center">
-                                    Lập trình Android nâng cao
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col mb-lg-4 mb-3">
-                            <div class="card">
-                                <div class="card-body d-flex justify-content-center">
-                                    <img src="img/subjects/WEBU.jpg" alt="">
-                                </div>
-                                <div class="card-footer text-center">
-                                    Xây dựng trang Web
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
+                    <ng-view></ng-view>
                 </div>
 
                 <!-- content right -->
                 <div class="col-3  m-box-right mb-4">
-
                     <side-bar class="p-0"></side-bar>
-
                 </div>
 
             </div>
@@ -125,22 +57,36 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/all.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- font awesome -->
+    <script src="/js/all.min.js"></script>
 
     <!-- My JS -->
-    <script src="js/silders.js"></script>
+    <script src="/js/process.js"></script>
 
     <!-- Angular JS -->
-    <script src="js/angular.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-route.min.js"></script>
+
+
+
     <!-- App AngularJS -->
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
+
+    <!-- Ctrl -->
+    <script src="/js/mainCtrl.js"></script>
 
     <!-- component -->
     <script src="/component/menu/menuComponent.js"></script>
     <script src="/component/sidebar/sidebarCombonent.js"></script>
+    <script src="/component/content/subject/subjectComponent.js"></script>
+    <script src="component/content/quizs/quizComponent.js"></script>
+
+    <!-- router -->
+    <script src="/router.js"></script>
 </body>
 
 </html>

@@ -3,8 +3,8 @@
         <i class="fas fa-th-list"></i> Danh mục
     </div>
     <ul class="list-group list-group-flush my-list">
-        <li class="list-group-item" ng-repeat='subject in ctrl.subjects | orderBy: "Name"'>
-            <a href="#">
+        <li class="list-group-item sidebar" onclick="activeSidebar(this)" id="sidebar{{subject.Id}}" ng-repeat='subject in ctrl.subjects | orderBy: "Name"'>
+            <a href="#!Test/{{subject.Id}}">
                        {{subject.Name}}
                 </a>
         </li>

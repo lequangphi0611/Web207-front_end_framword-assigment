@@ -1,16 +1,16 @@
 <!-- Test -->
-<div class="card" ng-repeat='qs in ctrl.questions | limitTo : 1 : 0'>
+<div class="card" ng-repeat='qs in ctrl.questions | limitTo : ctrl.step : ctrl.index'>
     <div class="card-header text-uppercase font-weight-bold">
-        <i class="fas fa-th-list"></i> xây dựng trang web
+        <i class="fas fa-th-list"></i> {{ctrl.subject.Name}}
     </div>
     <div class="card-body test-question-body">
         <h6 class="card-title border-bottom">
-            <b>1. </b> {{qs.Text}}
+            <b>{{ctrl.index + 1}}. </b> {{qs.Text}}
         </h6>
         <p class="card-text">
             <form>
                 <div class="custom-control custom-radio mb-2" ng-repeat="as in qs.Answers">
-                    <input type="radio" class="custom-control-input" id="answer{{as.Id}}" name="answer">
+                    <input type="radio" class="custom-control-input" id="answer{{as.Id}}" ng-value="{{as.Id}}" name="answer">
                     <label class="custom-control-label" for="answer{{as.Id}}">{{as.Text}}</label>
                 </div>
             </form>
@@ -26,22 +26,22 @@
 <nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" href="#">
+            <a class="page-link" href="" ng-click="ctrl.first()">
                 <i class="fas fa-step-backward"></i>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">
+            <a class="page-link" href="" ng-click="ctrl.prev()">
                 <i class="fas fa-backward"></i>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">
+            <a class="page-link" href="" ng-click="ctrl.next()">
                 <i class="fas fa-forward"></i>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">
+            <a class="page-link" href="" ng-click="ctrl.last()">
                 <i class="fas fa-step-forward"></i>
             </a>
         </li>

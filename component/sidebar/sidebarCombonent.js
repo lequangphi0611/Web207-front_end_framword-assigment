@@ -1,9 +1,9 @@
 app.component('sideBar', {
-    controller: function sideBarController($http) {
-
+    controller: function sideBarController(SubjectService) {
         let ctrl = this;
-        $http.get("/db/Subjects.js").then(response => {
-            ctrl.subjects = response.data;
+
+        SubjectService.getSubjects().then(response => {
+            ctrl.subjects = [...response.data];
         });
 
     },

@@ -1,16 +1,35 @@
-var app = angular.module("mApp", []);
+var app = angular.module("mApp", ["ngRoute"])
 
-app.controller("mainCtrl", async($rootScope, $scope, $http) => {
+.service('SubjectService', ['$http', function SubjectService($http) {
+    const http = "/db/Subjects.js";
 
-    $rootScope.title = "Trang chủ";
+    this.subjects = [];
 
-    $rootScope.getQuestionBySubjectId = async(id) => {
+    this.getSubjects = () => {
+        return $http.get(http);
+    };
 
-        await $http.get(`/db/Quizs/${id}.js`).then(response => {
-            $rootScope.questions = response.data;
-        });
+    $http.get(http).then(response => {
+        this.subjects = response.data;
+    });
+
+    this.findSubjectsBySubjectId = (subjectId) => {
+        let subjectResult = {};
+        for (let i = 0; i < this.subjects.length; i++) {
+            if (this.subjects[i].Id == subjectId) {
+                subjectResult = this.subjects[i];
+                break;
+            }
+        };
+        return subjectResult;
 
     };
 
+}])
 
-});
+.service('QuizService', ['$http', function QuizService($http) {
+    this.getQuizsBy = (subjectId) => {
+        const http = `/db/Quizs/${subjectId}.js`;
+        return $http.get(http);
+    };
+}])

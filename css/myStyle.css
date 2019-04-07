@@ -102,6 +102,11 @@ footer {
     background: #eeeeee;
 }
 
+.list-group-item.active {
+    background: rgb(230, 230, 230);
+    border: rgb(230, 230, 230);
+}
+
 
 /* md reposive */
 

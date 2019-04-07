@@ -19,11 +19,6 @@
         "Logo": "ADUI.jpg"
     },
     {
-        "Id": "ASNE",
-        "Name": "Lập trình ASP.NET",
-        "Logo": "ASNE.png"
-    },
-    {
         "Id": "CLCO",
         "Name": "Điện toán đám mây",
         "Logo": "CLCO.jpg"
