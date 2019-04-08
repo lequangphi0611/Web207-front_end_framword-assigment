@@ -35,10 +35,9 @@ function shuffleArray(args) {
     this.maxLength = args.length - 1;
 
     this.limit = (value) => {
-        if (value > args.length) {
-            return this;
+        if (value <= args.length) {
+            this.maxLength = value - 1;
         }
-        this.maxLength = value - 1;
         return this;
     };
 
@@ -62,10 +61,6 @@ function shuffleArray(args) {
     };
 };
 
-function randomIn(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 function active(input) {
     input.classList.add("active");
 };
@@ -80,4 +75,26 @@ function activeSidebar(input) {
         nonActive(sidebars[i]);
     }
     active(input);
+};
+
+function Storage(key) {
+
+    this.save = (data) => {
+        sessionStorage.setItem(key, JSON.stringify(data));
+        return this;
+    };
+
+    this.remove = () => {
+        sessionStorage.setItem(key, null);
+        return this;
+    };
+
+    this.isPresent = () => {
+        let storage = sessionStorage.getItem(key);
+        return storage != null && storage != 'null' && storage != undefined;
+    }
+
+    this.get = () => {
+        return JSON.parse(sessionStorage.getItem(key));
+    }
 };

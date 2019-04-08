@@ -1,7 +1,7 @@
 app.component('subjectsContent', {
     templateUrl: "/component/content/subject/subjectTemplate.html",
-    controller: function subjectsContentController(SubjectService) {
-
+    controller: function subjectsContentController(SubjectService, $rootScope) {
+        $rootScope.setTitle("Trang chủ");
         SubjectService.getSubjects().then(response => {
             this.subjects = [...response.data];
 

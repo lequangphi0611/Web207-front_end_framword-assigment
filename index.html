@@ -24,7 +24,47 @@
         <header class="m-header">
         </header>
 
-        <menu class="p-0 m-0"></menu>
+        <!-- Menu -->
+        <nav class="navbar navbar-expand-md navbar-light bg-light col-12 m-nav">
+            <a class="navbar-brand" href="#!subject">FPT Polytechnic</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link align-middle" href="#">Giới thiệu <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Góp ý</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hỏi đáp</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span ng-if="isLogin()">
+                                <i class="fas fa-user"></i> {{account.getFirstName()}}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#" ng-show="!isLogin()">Đăng ký</a>
+                            <a class="dropdown-item" href="/templates/login.html" ng-show="!isLogin()">Đăng nhập</a>
+                            <!-- <div class="dropdown-divider" ng-show="isLogin()"></div> -->
+                            <a class="dropdown-item" href="#" ng-show="isLogin()">Cập nhật tài khoản</a>
+                            <a class="dropdown-item" href="#" ng-show="isLogin()">Đổi mật khẩu</a>
+                            <a class="dropdown-item" href="#" ng-show="isLogin()">Thông tin</a>
+                            <a class="dropdown-item" href="#" ng-click="logOut()" ng-show="isLogin()">Đăng xuất</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <!-- Content -->
         <div class="col-12 mt-4 m-box">
@@ -79,11 +119,10 @@
     <!-- Ctrl -->
     <script src="/js/mainCtrl.js"></script>
 
-    <!-- component -->
-    <script src="/component/menu/menuComponent.js"></script>
     <script src="/component/sidebar/sidebarCombonent.js"></script>
     <script src="/component/content/subject/subjectComponent.js"></script>
-    <script src="component/content/quizs/quizComponent.js"></script>
+    <script src="/component/content/quizs/quizComponent.js"></script>
+    <script src="/component/content//quizs/start-quiz/startsQuizComponent.js"></script>
 
     <!-- router -->
     <script src="/router.js"></script>

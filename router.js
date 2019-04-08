@@ -3,7 +3,10 @@ app.config(function($routeProvider) {
         .when("/subject", {
             template: "<subjects-content></subjects-content>"
         })
-        .when("/Test/:id", {
+        .when("/start/:id", {
+            template: "<start-quiz></start-quiz>"
+        })
+        .when("/test/:id", {
             template: "<quizs-content></quizs-content>"
         })
         .otherwise({

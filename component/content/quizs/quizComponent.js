@@ -10,7 +10,6 @@ app.component('quizsContent', {
         ctrl.maxIndex = quizNumber - ctrl.step;
 
         ctrl.subject = SubjectService.findSubjectsBySubjectId($routeParams.id);
-        // activeSidebar(`sidebar${ctrl.subject.Id}`);
 
         QuizService.getQuizsBy($routeParams.id).then((response) => {
             ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();

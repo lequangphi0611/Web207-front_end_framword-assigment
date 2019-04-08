@@ -33,3 +33,11 @@ var app = angular.module("mApp", ["ngRoute"])
         return $http.get(http);
     };
 }])
+
+.service('StudentService', ['$http', function StudentService($http) {
+    const http = "/db/Students.js";
+
+    this.getStudents = () => {
+        return $http.get(http);
+    };
+}])

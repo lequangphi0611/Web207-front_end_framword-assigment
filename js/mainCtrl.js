@@ -1,4 +1,4 @@
-app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService) => {
+app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentService, $window) => {
 
     $rootScope.title = "Trang chủ";
 
@@ -6,10 +6,27 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService) => {
         $rootScope.title = name;
     };
 
-    $scope.account = null;
+    var storageUser = new Storage("user", null);
 
-    $scope.hasLogin = () => {
-        return $scope.account != null;
+    if (storageUser.isPresent()) {
+        $rootScope.account = storageUser.get();
+        $rootScope.account.getFirstName = () => {
+            let fullname = $rootScope.account.fullname.trim();
+            let firstName = fullname.substring(fullname.lastIndexOf(" "));
+            return firstName;
+        }
+    };
+
+    $rootScope.isLogin = () => {
+        return storageUser.isPresent();
+    };
+
+    $scope.logOut = () => {
+        storageUser.remove();
+        $window.location.reload();
     }
+
+
+
 
 });
