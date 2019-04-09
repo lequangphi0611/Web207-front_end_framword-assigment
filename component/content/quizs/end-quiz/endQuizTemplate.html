@@ -1,0 +1,29 @@
+<div class="col-12">
+    <p class="alert alert-{{$ctrl.subject.testInfo.total.score >=5 ? 'success' : 'danger'}} text-center h1 text-uppercase">
+        {{$ctrl.subject.testInfo.total.score >=5 ? 'passed' : 'failed'}} !
+    </p>
+    <div class="card mt-3 ">
+        <div class="card-header text-uppercase text-info font-weight-bold h5">
+            {{$ctrl.subject.Name}}
+        </div>
+        <table class="table table-bordered border-primary m-0 table-sm">
+            <thead>
+                <tr>
+                    <th>Câu hỏi</th>
+                    <th>Trả lời</th>
+                    <th>Điểm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="info in $ctrl.subject.testInfo.resultTests">
+                    <td scope="row"><b ng-bind="($index + 1) + '.'"></b> <span ng-bind="info.question"></span></td>
+                    <td ng-bind="info.correct ? 'Đúng' : 'Sai'"></td>
+                    <td ng-bind="info.scores + ' đ'"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="card-footer text-right">
+            <span class="font-weight-bold">Tổng điểm : </span> <span>{{$ctrl.subject.testInfo.total.score}}</span>
+        </div>
+    </div>
+</div>

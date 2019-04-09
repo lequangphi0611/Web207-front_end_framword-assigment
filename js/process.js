@@ -33,6 +33,7 @@ function changeBackgroundImg() {
 
 function shuffleArray(args) {
     this.maxLength = args.length - 1;
+    this.result = [];
 
     this.limit = (value) => {
         if (value <= args.length) {
@@ -40,8 +41,6 @@ function shuffleArray(args) {
         }
         return this;
     };
-
-    this.result = [];
 
     this.process = () => {
         let temp = [...args];

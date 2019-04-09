@@ -9,6 +9,12 @@ app.config(function($routeProvider) {
         .when("/test/:id", {
             template: "<quizs-content></quizs-content>"
         })
+        .when("/authenticate", {
+            templateUrl: "/templates/authenticate.html"
+        })
+        .when("/end/:idSubject", {
+            template: "<end-quiz></end-quiz>"
+        })
         .otherwise({
             redirectTo: "/subject"
         })

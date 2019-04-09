@@ -1,6 +1,6 @@
 app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentService, $window) => {
 
-    $rootScope.title = "Trang chủ";
+    $rootScope.title = "Online Training";
 
     $rootScope.setTitle = (name) => {
         $rootScope.title = name;
@@ -14,7 +14,8 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
             let fullname = $rootScope.account.fullname.trim();
             let firstName = fullname.substring(fullname.lastIndexOf(" "));
             return firstName;
-        }
+        };
+        $rootScope.account.subjects = [];
     };
 
     $rootScope.isLogin = () => {
