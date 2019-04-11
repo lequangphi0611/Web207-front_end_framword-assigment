@@ -1,6 +1,6 @@
 app.config(function($routeProvider) {
     $routeProvider
-        .when("/subject", {
+        .when("/", {
             template: "<subjects-content></subjects-content>"
         })
         .when("/start/:id", {
@@ -16,6 +16,6 @@ app.config(function($routeProvider) {
             template: "<end-quiz></end-quiz>"
         })
         .otherwise({
-            redirectTo: "/subject"
-        })
+            redirectTo: "/"
+        });
 });

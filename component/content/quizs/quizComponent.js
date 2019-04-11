@@ -78,7 +78,7 @@ app.component('quizsContent', {
 
         // finish test
         ctrl.finish = function(idSubject) {
-            ctrl.subject.testInfo = processScore(ctrl.myAnswers, ctrl.questions);
+            ctrl.subject.testInfo = QuizService.getInfoTest(ctrl.myAnswers, ctrl.questions);
             $rootScope.account.subjects.push(ctrl.subject);
             $location.path(`/end/${idSubject}`);
         };
@@ -90,7 +90,7 @@ app.component('quizsContent', {
 
 function formatTime(param) {
     return param < 10 ? "0" + param : param;
-};
+}
 
 function getMinutesAndSeconds(duration) {
     let minutes = parseInt(duration / 60, 10);
@@ -103,31 +103,4 @@ function getMinutesAndSeconds(duration) {
         minutes: minutes,
         seconds: seconds
     };
-};
-
-function processScore(myAnswers, questions) {
-    let incorrectAnswerCount = 0;
-    let correctAnwersCount = 0;
-    let score = 0;
-    let resultTests = [];
-
-    for (let i = 0; i < questions.length; i++) {
-        let correct = myAnswers[i] && myAnswers[i] == questions[i].AnswerId;
-        if (correct) {
-            correctAnwersCount++;
-            score += questions[i].Marks;
-        } else {
-            incorrectAnswerCount++;
-        }
-        resultTests.push({ question: questions[i].Text, correct: correct, scores: (correct ? questions[i].Marks : 0) });
-    }
-
-    return {
-        resultTests: resultTests,
-        total: {
-            incorrectAnswerCount: incorrectAnswerCount,
-            correctAnwersCount: correctAnwersCount,
-            score: score
-        }
-    }
-};
+}

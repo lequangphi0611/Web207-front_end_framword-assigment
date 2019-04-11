@@ -23,12 +23,14 @@ function randomImgUrl() {
 }
 
 function changeBackgroundImg() {
-    header.className += " fadeOut";
-    setTimeout(function() {
-        header.className = "m-header";
-    }, 1000)
-    setBackgroundImg(randomImgUrl());
-    setTimeout(changeBackgroundImg, 3000);
+    if (header) {
+        header.className += " fadeOut";
+        setTimeout(function () {
+            header.className = "m-header";
+        }, 1000)
+        setBackgroundImg(randomImgUrl());
+        setTimeout(changeBackgroundImg, 3000);
+    }
 }
 
 function shuffleArray(args) {

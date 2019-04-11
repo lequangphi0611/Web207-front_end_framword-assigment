@@ -1,12 +1,35 @@
-<div class="card">
-    <div class="card-header font-weight-bold">
-        <i class="fas fa-th-list"></i> Danh mục
+<form class="form-inline my-2 my-lg-0 col-12 p-0">
+  <div class="input-group mb-3 col-12 p-0">
+    <input
+      class="form-control"
+      ng-model="ctrl.key.subjectName"
+      ng-change="ctrl.show()"
+      type="search"
+      placeholder="Nhập tên môn học"
+      aria-label="Search"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2"
+        ><i class="fas fa-search"></i
+      ></span>
     </div>
-    <ul class="list-group list-group-flush my-list">
-        <li class="list-group-item sidebar" onclick="activeSidebar(this)" id="sidebar{{subject.Id}}" ng-repeat='subject in ctrl.subjects | orderBy: "Name"'>
-            <a href="#!start/{{subject.Id}}">
-                       {{subject.Name}}
-                </a>
-        </li>
-    </ul>
+  </div>
+</form>
+
+<div class="card mt-2">
+  <div class="card-header font-weight-bold">
+    <i class="fas fa-th-list"></i> Danh mục
+  </div>
+  <ul class="list-group list-group-flush my-list">
+    <li
+      class="list-group-item sidebar"
+      onclick="activeSidebar(this)"
+      id="sidebar{{ subject.Id }}"
+      ng-repeat='subject in ctrl.subjects | filter : ctrl.key.subjectName | orderBy: "Id"'>
+      <a ng-href="{{ !ctrl.hasTested(subject.Id) ? '#!start/' + subject.Id : '#!/'}}">
+        {{ subject.Id }} - {{ subject.Name }}
+        <span ng-show="ctrl.hasTested(subject.Id)" class="badge badge-secondary">Đã thi</span>
+      </a>
+    </li>
+  </ul>
 </div>
