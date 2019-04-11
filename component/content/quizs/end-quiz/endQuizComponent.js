@@ -9,12 +9,13 @@ app.component('endQuiz', {
         for (let i = 0; i < $rootScope.account.subjects.length; i++) {
             if ($routeParams.idSubject == $rootScope.account.subjects[i].Id) {
                 this.subject = $rootScope.account.subjects[i];
+                $rootScope.setTitle(this.subject.Name);
                 break;
             }
         }
 
         if (this.subject == undefined) {
-            $location.path("/subject");
+            $location.path("/");
             return;
         }
     }

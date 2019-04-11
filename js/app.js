@@ -32,6 +32,47 @@ var app = angular.module("mApp", ["ngRoute"])
         const http = `/db/Quizs/${subjectId}.js`;
         return $http.get(http);
     };
+
+    this.getInfoTest = function(myAnswers, allQuestions) {
+        var testInfo = {};
+        testInfo.detail = [];
+        testInfo.totalScores = 0;
+
+        for (let i = 0; i < allQuestions.length; i++) {
+            let isCorrect = myAnswers[i] && myAnswers[i] == allQuestions[i].AnswerId;
+            let scores = isCorrect ? allQuestions[i].Marks : 0;
+            testInfo.totalScores += scores;
+            testInfo.detail.push({
+                questionText: allQuestions[i].Text,
+                correct: isCorrect,
+                scores: scores
+            });
+        }
+
+        function count(condition) {
+            var count = 0;
+            testInfo.detail.forEach(function(detail) {
+                if (condition(detail)) {
+                    count++;
+                }
+            });
+            return count;
+        }
+
+        testInfo.countCorrectAnswer = function() {
+            return count(function(detail) {
+                return detail.correct;
+            });
+        };
+
+        testInfo.countInCorrectAnswer = function() {
+            return count(function(detail) {
+                return !detail.correct;
+            });
+        };
+
+        return testInfo;
+    };
 }])
 
 .service('StudentService', ['$http', function StudentService($http) {
@@ -40,4 +81,5 @@ var app = angular.module("mApp", ["ngRoute"])
     this.getStudents = () => {
         return $http.get(http);
     };
+
 }])

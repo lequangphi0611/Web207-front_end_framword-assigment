@@ -1,6 +1,7 @@
 app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentService, $window) => {
 
     $rootScope.title = "Online Training";
+    $rootScope.key = {};
 
     $rootScope.setTitle = (name) => {
         $rootScope.title = name;
@@ -16,6 +17,15 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
             return firstName;
         };
         $rootScope.account.subjects = [];
+        $rootScope.account.hasTested = (subjectId) => {
+            let subjects = [...$rootScope.account.subjects];
+            for (let i = 0; i < subjects.length; i++) {
+                if (subjectId == subjects[i].Id) {
+                    return true;
+                }
+            }
+            return false;
+        };
     };
 
     $rootScope.isLogin = () => {
@@ -25,9 +35,6 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
     $scope.logOut = () => {
         storageUser.remove();
         $window.location.reload();
-    }
-
-
-
+    };
 
 });

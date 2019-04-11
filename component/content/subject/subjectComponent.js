@@ -2,6 +2,8 @@ app.component('subjectsContent', {
     templateUrl: "/component/content/subject/subjectTemplate.html",
     controller: function subjectsContentController(SubjectService, $rootScope) {
         $rootScope.setTitle("Online Training");
+        this.key = $rootScope.key;
+        this.hasTested = $rootScope.account.hasTested;
         SubjectService.getSubjects().then(response => {
             this.subjects = [...response.data];
 
