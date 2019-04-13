@@ -28,5 +28,15 @@
         "birthday": "1993-05-15",
         "schoolfee": "2000000",
         "marks": "0"
+    },
+    {
+        "username": "quangphi0611",
+        "password": "quangphi",
+        "fullname": "Lê Quang Phi",
+        "email": "philqpd02256@fpt.edu.vn",
+        "gender": "true",
+        "birthday": "1999-11-06",
+        "schoolfee": "2000000",
+        "marks": "0"
     }
 ]

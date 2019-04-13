@@ -26,9 +26,9 @@
       onclick="activeSidebar(this)"
       id="sidebar{{ subject.Id }}"
       ng-repeat='subject in ctrl.subjects | filter : ctrl.key.subjectName | orderBy: "Id"'>
-      <a ng-href="{{ !ctrl.hasTested(subject.Id) ? '#!start/' + subject.Id : '#!/'}}">
+      <a ng-href="{{ !ctrl.hasTested(subject.Id) ? '#!start/' + subject.Id : '#!/end/' + subject.Id}}">
         {{ subject.Id }} - {{ subject.Name }}
-        <span ng-show="ctrl.hasTested(subject.Id)" class="badge badge-secondary">Đã thi</span>
+        <span ng-show="ctrl.hasTested(subject.Id)" class="badge badge-info">Đã thi</span>
       </a>
     </li>
   </ul>

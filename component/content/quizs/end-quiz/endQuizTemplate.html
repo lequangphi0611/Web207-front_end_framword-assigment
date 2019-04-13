@@ -6,6 +6,14 @@
   >
     {{ $ctrl.subject.testInfo.totalScores >= 5 ? "passed" : "failed" }} !
   </p>
+  <div class="w-100 text-right px-3">
+    <b>Kết thúc : </b>
+    <span class="text-muted">{{
+      $ctrl.subject.testInfo.endTime
+        | date: "HH:mm,  'ngày' dd 'tháng' MM 'năm' yyyy"
+    }}</span>
+  </div>
+
   <div class="card mt-3 ">
     <div class="card-header text-uppercase text-info font-weight-bold h5">
       {{ $ctrl.subject.Name }}

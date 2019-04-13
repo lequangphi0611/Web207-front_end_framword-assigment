@@ -5,21 +5,28 @@
   >
     <div class="card">
       <div class="card-body d-flex justify-content-center">
-        <a ng-href="{{ !$ctrl.hasTested(subject.Id) ? '#!start/' + subject.Id : '#!/'}}"
+        <a
+          ng-href="{{
+            !$ctrl.hasTested(subject.Id)
+              ? '#!start/' + subject.Id
+              : '#!/end/' + subject.Id
+          }}"
           ><img ng-src="img/subjects/{{ subject.Logo }}" alt=""
         /></a>
       </div>
       <div class="card-footer text-center">
         <a
-        ng-href="{{ !$ctrl.hasTested(subject.Id) ? '#!start/' + subject.Id : '#!/'}}"
+          ng-href="{{
+            !$ctrl.hasTested(subject.Id)
+              ? '#!start/' + subject.Id
+              : '#!/end/' + subject.Id
+          }}"
           class="text-dark"
-          style="text-decoration: none;"
-          >{{ subject.Name }}</a
-        >
-        <span
-          ng-show="$ctrl.hasTested(subject.Id)"
-          class="badge badge-secondary"
-          >Đã thi</span
+          style="text-decoration: none; font-size: 1.2em"
+          >{{ subject.Id }} - {{ subject.Name }}
+          <span ng-show="$ctrl.hasTested(subject.Id)" class="badge badge-info"
+            >Đã thi</span
+          ></a
         >
       </div>
     </div>

@@ -1,10 +1,6 @@
 app.component('endQuiz', {
     templateUrl: "/component/content/quizs/end-quiz/endQuizTemplate.html",
     controller: function EndQuizController($routeParams, $rootScope, $location) {
-        if (!$rootScope.isLogin()) {
-            $location.path("/authenticate");
-            return;
-        }
 
         for (let i = 0; i < $rootScope.account.subjects.length; i++) {
             if ($routeParams.idSubject == $rootScope.account.subjects[i].Id) {
@@ -14,9 +10,5 @@ app.component('endQuiz', {
             }
         }
 
-        if (this.subject == undefined) {
-            $location.path("/");
-            return;
-        }
     }
 })

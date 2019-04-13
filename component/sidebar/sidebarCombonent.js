@@ -6,7 +6,9 @@ app.component('sideBar', {
             ctrl.subjects = [...response.data];
         });
         ctrl.key = $rootScope.key;
-        ctrl.hasTested = $rootScope.account.hasTested;
+        if ($rootScope.account) {
+            ctrl.hasTested = $rootScope.account.hasTested;
+        }
     },
     controllerAs: "ctrl",
     templateUrl: "/component/sidebar/sidebarTemplate.html"

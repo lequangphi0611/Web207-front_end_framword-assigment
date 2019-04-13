@@ -1,44 +1,71 @@
 app.component('quizsContent', {
-    controller: function quizsContentController($http, $interval, $rootScope, SubjectService, QuizService, $routeParams, $document, $location) {
-
-        if (!$rootScope.isLogin()) {
-            $location.path("/authenticate");
-            return;
-        }
+    controller: function quizsContentController($scope, $interval, $rootScope, SubjectService, QuizService, $routeParams, $document, $location) {
 
         let ctrl = this;
+        var myLocalStorage = new MyLocalStorage("testInfo");
 
         ctrl.step = 1;
-        ctrl.index = 0;
+        ctrl.timer = {};
         let quizNumber = 10;
 
-        ctrl.maxIndex = quizNumber - ctrl.step;
+        (function init() {
+            var isExistsStorage = myLocalStorage.isPresent();
+            var testInfo;
+            ctrl.index = 0;
+            ctrl.myAnswers = [];
+            ctrl.timer.value = 5 * 60;
+            if (isExistsStorage) {
+                testInfo = myLocalStorage.get();
+                ctrl.questions = [...testInfo.questions];
+                ctrl.index = testInfo.index;
+                ctrl.myAnswers = [...testInfo.myAnswers];
+                ctrl.timer.value = testInfo.time;
+                myLocalStorage.clear();
+            } else {
+                loadQuestions();
+            }
+        })();
 
+        ctrl.maxIndex = quizNumber - ctrl.step;
+        for (let i = 0; i < $rootScope.account.subjects.length; i++) {
+            let subject = $rootScope.account.subjects[i];
+            if (subject.Id == $routeParams.id) {
+                $location.path(`/end/${$routeParams.id}`);
+                return;
+            }
+        }
         // lấy môn học từ url param
         ctrl.subject = SubjectService.findSubjectsBySubjectId($routeParams.id);
 
-        // count down
-        ctrl.timer = {};
-        ctrl.timer.value = 8 * 60;
-        ctrl.startCountdown = () => {
+        var intervalCountdown;
+        (function () {
             function countdown() {
                 let minuteAndSecond = getMinutesAndSeconds(ctrl.timer.value);
                 ctrl.timer.minutes = minuteAndSecond.minutes;
                 ctrl.timer.seconds = minuteAndSecond.seconds;
                 if (--ctrl.timer.value < 0) {
-                    ctrl.timer.value == 0;
+                    ctrl.timer.value = 0;
+                    // ctrl.finish();
+                    $location.path(`/end/${$routeParams.id}`);
                 }
             }
             countdown();
-            $interval(() => { countdown() }, 1000);
-        }
-        ctrl.startCountdown();
+            intervalCountdown = $interval(() => {
+                countdown();
+            }, 1000);
+        })();
+
+        function stopCountDown() {
+            $interval.cancel(intervalCountdown);
+        };
 
         // Lấy quizs theo môn học
-        QuizService.getQuizsBy($routeParams.id).then((response) => {
-            ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();
-            $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
-        });
+        function loadQuestions() {
+            QuizService.getQuizsBy($routeParams.id).then((response) => {
+                ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();
+                $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
+            });
+        }
 
         // Phân trang
         ctrl.hasNext = () => {
@@ -73,16 +100,30 @@ app.component('quizsContent', {
             }
         };
 
-        // Quiz procress
-        ctrl.myAnswers = [];
-
         // finish test
-        ctrl.finish = function(idSubject) {
+        ctrl.finish = function () {
             ctrl.subject.testInfo = QuizService.getInfoTest(ctrl.myAnswers, ctrl.questions);
+            ctrl.subject.testInfo.endTime = new Date();
             $rootScope.account.subjects.push(ctrl.subject);
-            $location.path(`/end/${idSubject}`);
         };
 
+        ctrl.$onDestroy = function destroy() {
+            var newPath = $location.path();
+            var testInfo = {};
+            testInfo.time = ctrl.timer.value;
+            testInfo.questions = [...ctrl.questions];
+            testInfo.myAnswers = [...ctrl.myAnswers];
+            testInfo.index = ctrl.index;
+            myLocalStorage.save(testInfo);
+            if (ctrl.timer.value > 0 && !confirm("Bạn đang làm bài kiểm tra, nếu rời khỏi hệ thống sẽ tính điểm !\nBạn có muốn thoát hay không ? ")) {
+                $location.path(`/test/${ctrl.subject.Id}`);
+            } else {
+                stopCountDown();
+                myLocalStorage.clear();
+                ctrl.finish();
+                $location.path(newPath);
+            }
+        };
     },
     controllerAs: "ctrl",
     templateUrl: "/component/content/quizs/quizTemplate.html"
@@ -103,4 +144,25 @@ function getMinutesAndSeconds(duration) {
         minutes: minutes,
         seconds: seconds
     };
+}
+
+function MyLocalStorage(key) {
+    this.save = function (data) {
+        localStorage.setItem(key, JSON.stringify(data));
+        return this;
+    };
+
+    this.clear = function () {
+        localStorage.setItem(key, undefined);
+        return this;
+    };
+
+    this.isPresent = function () {
+        var ob = localStorage.getItem(key);
+        return ob != '' && ob != "null" && ob != "undefined" & ob != null;
+    };
+
+    this.get = function () {
+        return JSON.parse(localStorage.getItem(key));
+    }
 }

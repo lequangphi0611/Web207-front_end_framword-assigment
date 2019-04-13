@@ -1,8 +1,11 @@
 <!-- Test -->
 <p class="h1 text-center mb-5" ng-if="ctrl.timer.minutes && ctrl.timer.seconds && ctrl.timer.value >= 0">
     Thời gian còn lại : <span ng-bind='ctrl.timer.minutes'></span> Phút <span ng-bind="ctrl.timer.seconds"></span> giây</p>
+<!-- Button trigger modal -->
+<a  class="btn btn-danger btn-lg m-3"  ng-href="#!/end/{{ctrl.subject.Id}}">
+Kết thúc kiểm tra
+</a>
 
-<button class="btn btn-danger btn-lg m-3" ng-click="ctrl.finish(ctrl.subject.Id)">Kết thúc kiểm tra</button>
 <div class="card" ng-repeat='qs in ctrl.questions | limitTo : ctrl.step : ctrl.index'>
     <div class="card-header text-uppercase font-weight-bold">
         <i class="fas fa-th-list"></i> {{ctrl.subject.Name}}
@@ -22,7 +25,7 @@
         </p>
     </div>
     <div class="card-footer text-muted text-uppercase">
-        mark: 0/100
+        {{ctrl.index + 1}}/{{ctrl.questions.length}}
     </div>
 </div>
 
