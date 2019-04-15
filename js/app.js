@@ -79,23 +79,32 @@ var app = angular.module("mApp", ["ngRoute"])
         const http = "/db/Students.js";
         const myStorage = new MyLocalStorage("students");
 
-        $http.get(http).then(response => {
-            myStorage.save(response.data);
-        });
-
         this.getAllStudent = () => {
             return myStorage.get();
         };
+
+        if (this.getAllStudent() == null) {
+            $http.get(http).then(response => {
+                myStorage.save(response.data);
+            });
+        }
 
         this.saveAll = (students) => {
             myStorage.save(students);
         };
 
+        this.existByUsername = (username) => {
+            return this.findStudentsById(username) != null;
+        };
+
         this.appendStudent = (student) => {
-            var students = myStorage.get();
-            students.push(student);
-            this.saveAll(students);
-            return student;
+            if (!this.existByUsername(student.username)) {
+                var students = myStorage.get();
+                var index = students.push(student) - 1;
+                this.saveAll(students);
+                return index;
+            }
+            return -1;
         };
 
         this.findStudentsById = (username) => {
@@ -107,10 +116,6 @@ var app = angular.module("mApp", ["ngRoute"])
                 }
             };
             return student;
-        };
-
-        this.existByUsername = (username) => {
-            return findStudentsById(username) != null;
         };
 
         this.indexOf = (student) => {

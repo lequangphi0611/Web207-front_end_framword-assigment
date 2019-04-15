@@ -19,6 +19,9 @@ app
             .when("/profile", {
                 template : "<profile-content></profile-content>"
             })
+            .when("/register", {
+                template : "<register></register>"
+            })
             .otherwise({
                 redirectTo: "/"
             });
@@ -26,7 +29,7 @@ app
 
     .run(($rootScope, $location) => {
         $rootScope.$on('$locationChangeStart', (event, next, current) => {
-            var urls = ["/", "/authenticate", ""];
+            var urls = ["/", "/authenticate", "", "/register"];
             if (urls.indexOf($location.path()) < 0 && !$rootScope.isLogin()) {
                 $location.path("/authenticate");
             }

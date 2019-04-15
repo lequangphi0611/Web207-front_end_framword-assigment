@@ -45,7 +45,6 @@ app.component('quizsContent', {
             ctrl.timer.seconds = minuteAndSecond.seconds;
             if (--ctrl.timer.value < 0) {
                 ctrl.timer.value = 0;
-                // ctrl.finish();
                 $location.path(`/end/${$routeParams.id}`);
             }
         }
