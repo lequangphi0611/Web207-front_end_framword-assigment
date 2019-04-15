@@ -3,11 +3,12 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
     $rootScope.title = "Online Training";
     $rootScope.key = {};
 
+    var storageUser = new Storage("user", null);
+
     $rootScope.setTitle = (name) => {
         $rootScope.title = name;
     };
 
-    var storageUser = new Storage("user", null);
 
     if (storageUser.isPresent()) {
         $rootScope.account = storageUser.get();
@@ -26,6 +27,16 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
             }
             return false;
         };
+        $rootScope.account.getTotalScores = function() {
+            var sumScores = 0;
+            if($rootScope.account.subjects.length > 0) {
+                $rootScope.account.subjects.forEach(subject => {
+                    sumScores += subject.testInfo.totalScores;
+                });
+                $rootScope.account.marks = sumScores / $rootScope.account.subjects.length;
+            }
+            return $rootScope.account.marks;
+        }
     };
 
     $rootScope.isLogin = () => {

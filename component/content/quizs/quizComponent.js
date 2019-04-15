@@ -38,17 +38,18 @@ app.component('quizsContent', {
         ctrl.subject = SubjectService.findSubjectsBySubjectId($routeParams.id);
 
         var intervalCountdown;
-        (function () {
-            function countdown() {
-                let minuteAndSecond = getMinutesAndSeconds(ctrl.timer.value);
-                ctrl.timer.minutes = minuteAndSecond.minutes;
-                ctrl.timer.seconds = minuteAndSecond.seconds;
-                if (--ctrl.timer.value < 0) {
-                    ctrl.timer.value = 0;
-                    // ctrl.finish();
-                    $location.path(`/end/${$routeParams.id}`);
-                }
+
+        function countdown() {
+            let minuteAndSecond = getMinutesAndSeconds(ctrl.timer.value);
+            ctrl.timer.minutes = minuteAndSecond.minutes;
+            ctrl.timer.seconds = minuteAndSecond.seconds;
+            if (--ctrl.timer.value < 0) {
+                ctrl.timer.value = 0;
+                // ctrl.finish();
+                $location.path(`/end/${$routeParams.id}`);
             }
+        }
+        (function () {
             countdown();
             intervalCountdown = $interval(() => {
                 countdown();
@@ -144,25 +145,4 @@ function getMinutesAndSeconds(duration) {
         minutes: minutes,
         seconds: seconds
     };
-}
-
-function MyLocalStorage(key) {
-    this.save = function (data) {
-        localStorage.setItem(key, JSON.stringify(data));
-        return this;
-    };
-
-    this.clear = function () {
-        localStorage.setItem(key, undefined);
-        return this;
-    };
-
-    this.isPresent = function () {
-        var ob = localStorage.getItem(key);
-        return ob != '' && ob != "null" && ob != "undefined" & ob != null;
-    };
-
-    this.get = function () {
-        return JSON.parse(localStorage.getItem(key));
-    }
 }

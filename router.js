@@ -16,6 +16,9 @@ app
             .when("/end/:idSubject", {
                 template: "<end-quiz></end-quiz>"
             })
+            .when("/profile", {
+                template : "<profile-content></profile-content>"
+            })
             .otherwise({
                 redirectTo: "/"
             });

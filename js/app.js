@@ -77,9 +77,61 @@ var app = angular.module("mApp", ["ngRoute"])
 
     .service('StudentService', ['$http', function StudentService($http) {
         const http = "/db/Students.js";
+        const myStorage = new MyLocalStorage("students");
 
-        this.getStudents = () => {
-            return $http.get(http);
+        $http.get(http).then(response => {
+            myStorage.save(response.data);
+        });
+
+        this.getAllStudent = () => {
+            return myStorage.get();
+        };
+
+        this.saveAll = (students) => {
+            myStorage.save(students);
+        };
+
+        this.appendStudent = (student) => {
+            var students = myStorage.get();
+            students.push(student);
+            this.saveAll(students);
+            return student;
+        };
+
+        this.findStudentsById = (username) => {
+            var students = this.getAllStudent();
+            var student = null;
+            for (let i = 0; i < students.length; i++) {
+                if (username === students[i].username) {
+                    student = students[i];
+                }
+            };
+            return student;
+        };
+
+        this.existByUsername = (username) => {
+            return findStudentsById(username) != null;
+        };
+
+        this.indexOf = (student) => {
+            var students = this.getAllStudent();
+            for (let i = 0; i < students.length; i++) {
+                if (student.username == students[i].username) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        this.updateStudent = (newStudent) => {
+            var students = this.getAllStudent();
+            var oldStudent = this.findStudentsById(newStudent.username);
+            if (oldStudent == null) {
+                return null;
+            }
+            var index = this.indexOf(oldStudent);
+            students[index] = newStudent;
+            return newStudent;
         };
 
     }])

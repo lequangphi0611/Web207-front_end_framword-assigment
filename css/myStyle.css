@@ -107,8 +107,9 @@ footer {
     border: rgb(230, 230, 230);
 }
 
-
-/* Styles for wrapping the search box */
+.table-spacing td{
+    padding-right : 20px;
+}
 
 
 /* md reposive */
