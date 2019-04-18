@@ -30,27 +30,11 @@ Kết thúc kiểm tra
 </div>
 
 <!-- Pagination -->
-<nav aria-label="Page navigation example" class="mt-4 d-flex justify-content-center">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="" ng-click="ctrl.first()">
-                <i class="fas fa-step-backward"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="" ng-click="ctrl.prev()">
-                <i class="fas fa-backward"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="" ng-click="ctrl.next()">
-                <i class="fas fa-forward"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="" ng-click="ctrl.last()">
-                <i class="fas fa-step-forward"></i>
-            </a>
-        </li>
-    </ul>
+<nav class="mt-4 d-flex justify-content-between">
+    <button class="btn btn-primary col-2" ng-click="ctrl.prev()" ng-disabled="!ctrl.hasPrev()">
+        Back
+    </button>
+    <button class="btn btn-primary col-2"  ng-click="ctrl.next()" ng-disabled="!ctrl.hasNext()">
+        Next
+    </button>
 </nav>

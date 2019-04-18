@@ -5,6 +5,8 @@ app
     });
 
 function registerController($rootScope, $window, StudentService) {
+    $rootScope.setTitle("Đăng ký tài khoản")
+
     this.student = {};
     this.student.gender = true;
     this.birthday = new Date();

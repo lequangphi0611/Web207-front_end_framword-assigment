@@ -17,10 +17,13 @@ app
                 template: "<end-quiz></end-quiz>"
             })
             .when("/profile", {
-                template : "<profile-content></profile-content>"
+                template: "<profile-content></profile-content>"
             })
             .when("/register", {
-                template : "<register></register>"
+                template: "<register></register>"
+            })
+            .when("/edit/profile", {
+                template : "<update-profile></update-profile>"
             })
             .otherwise({
                 redirectTo: "/"

@@ -2,12 +2,12 @@
 
 <div class="container col-12 mt-5">
     <table style="font-size: 1.25rem;" class="table-spacing">
-        <tr >
+        <tr>
             <td>Họ tên đầy đủ </td>
             <td>:</td>
             <td class="font-weight-bold">{{$ctrl.student.fullname}}</td>
         </tr>
-        <tr >
+        <tr>
             <td>Điểm </td>
             <td>:</td>
             <td class="font-weight-bold">{{$ctrl.student.getTotalScores() | number : 1}} đ</td>
@@ -36,17 +36,17 @@
                         <td scope="row">{{$index + 1}}</td>
                         <td>{{subject.Id}}</td>
                         <td>{{subject.Name}}</td>
-                        <td>{{subject.testInfo.countCorrectAnswer()}}</td>
-                        <td>{{subject.testInfo.countInCorrectAnswer()}}</td>
+                        <td>{{subject.testInfo.correctAnswer}}</td>
+                        <td>{{subject.testInfo.incorrectAnswer}}</td>
                         <td>{{subject.testInfo.totalScores}}</td>
                         <td>
                             <a ng-href="#!end/{{subject.Id}}" class="text-dark">Xem chi tiết</a>
                         </td>
                     </tr>
-                   <tr ng-show="$ctrl.student.subjects.length == 0">
+                    <tr ng-show="$ctrl.student.subjects.length == 0">
                         <td colspan="7" class="text-center">Bạn chưa thi môn nào</td>
-                   </tr>
-                   
+                    </tr>
+
                 </tbody>
             </table>
         </div>

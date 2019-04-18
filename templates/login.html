@@ -172,15 +172,17 @@
     <script>
       app.controller(
         "loginCtrl",
-        ($rootScope, $scope, StudentService, $window) => {
+        ($rootScope, $scope, StudentService, $window, SessionService) => {
           $rootScope.setTitle("Đăng nhập");
 
           $scope.loginInfo = {};
 
           $scope.processLogin = () => {
+            
             let user = StudentService.findStudentsById(
               $scope.loginInfo.username
             );
+
             if (user == null) {
               $scope.errorMessage = "Không tìm thấy tên đăng nhập";
               return;
@@ -192,7 +194,7 @@
             }
 
             $scope.errorMessage = null;
-            new Storage("user").save(user);
+            SessionService.create("user").save(user);
             $window.location.href = "/index.html";
           };
         }

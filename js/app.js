@@ -1,5 +1,54 @@
 var app = angular.module("mApp", ["ngRoute"])
 
+    .service('Util', function Util() {
+
+        this.getRandomNumber = (min, max) => {
+            return Math.floor(Math.random() * ((max + 1) - min) + min);
+        };
+
+        this.getRandomElementInArray = (args, numberElement) => {
+            var resultArgs = [];
+            var tempArgs = [...args];
+
+            for (i = numberElement; i > 0;) {
+                let index = this.getRandomNumber(0, tempArgs.length);
+                if (tempArgs[index]) {
+                    resultArgs.push(tempArgs[index]);
+                    tempArgs.splice(index, 1);
+                    i--;
+                }
+            };
+
+            return resultArgs;
+        };
+
+    })
+
+    .service('SessionService', function sessionService() {
+
+        this.create = (key) => {
+            this.key = key;
+            return this;
+        };
+
+        this.save = (data) => {
+            sessionStorage.setItem(this.key, JSON.stringify(data));
+        };
+
+        this.remove = () => {
+            sessionStorage.setItem(this.key, null);
+        };
+
+        this.isPresent = () => {
+            var data = this.get();
+            return data != null && data != 'null' && data != undefined;
+        };
+
+        this.get = () => {
+            return JSON.parse(sessionStorage.getItem(this.key));
+        };
+    })
+
     .service('SubjectService', ['$http', function SubjectService($http) {
         const http = "/db/Subjects.js";
 
@@ -28,6 +77,7 @@ var app = angular.module("mApp", ["ngRoute"])
     }])
 
     .service('QuizService', ['$http', function QuizService($http) {
+
         this.getQuizsBy = (subjectId) => {
             const http = `/db/Quizs/${subjectId}.js`;
             return $http.get(http);
@@ -37,10 +87,20 @@ var app = angular.module("mApp", ["ngRoute"])
             var testInfo = {};
             testInfo.detail = [];
             testInfo.totalScores = 0;
+            testInfo.correctAnswer = 0;
+            testInfo.incorrectAnswer = 0;
 
             for (let i = 0; i < allQuestions.length; i++) {
                 let isCorrect = myAnswers[i] && myAnswers[i] == allQuestions[i].AnswerId;
-                let scores = isCorrect ? allQuestions[i].Marks : 0;
+                let scores = 0;
+
+                if(isCorrect) {
+                    testInfo.correctAnswer++;
+                    scores = allQuestions[i].Marks;
+                } else  {
+                    testInfo.incorrectAnswer++;
+                }
+
                 testInfo.totalScores += scores;
                 testInfo.detail.push({
                     questionText: allQuestions[i].Text,
@@ -49,7 +109,7 @@ var app = angular.module("mApp", ["ngRoute"])
                 });
             }
 
-            function count(condition) {
+            testInfo.count = function(condition) {
                 var count = 0;
                 testInfo.detail.forEach(function (detail) {
                     if (condition(detail)) {
@@ -60,15 +120,11 @@ var app = angular.module("mApp", ["ngRoute"])
             }
 
             testInfo.countCorrectAnswer = function () {
-                return count(function (detail) {
-                    return detail.correct;
-                });
+                return testInfo.count(detail => detail.correct);
             };
 
             testInfo.countInCorrectAnswer = function () {
-                return count(function (detail) {
-                    return !detail.correct;
-                });
+                return testInfo.count(detail => !detail.correct);
             };
 
             return testInfo;
@@ -136,6 +192,7 @@ var app = angular.module("mApp", ["ngRoute"])
             }
             var index = this.indexOf(oldStudent);
             students[index] = newStudent;
+            this.saveAll(students);
             return newStudent;
         };
 

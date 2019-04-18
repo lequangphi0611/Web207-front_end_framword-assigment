@@ -78,28 +78,6 @@ function activeSidebar(input) {
     active(input);
 };
 
-function Storage(key) {
-
-    this.save = (data) => {
-        sessionStorage.setItem(key, JSON.stringify(data));
-        return this;
-    };
-
-    this.remove = () => {
-        sessionStorage.setItem(key, null);
-        return this;
-    };
-
-    this.isPresent = () => {
-        let storage = sessionStorage.getItem(key);
-        return storage != null && storage != 'null' && storage != undefined;
-    }
-
-    this.get = () => {
-        return JSON.parse(sessionStorage.getItem(key));
-    }
-};
-
 function MyLocalStorage(key) {
     this.save = function (data) {
         localStorage.setItem(key, JSON.stringify(data));

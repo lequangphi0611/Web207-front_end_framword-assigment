@@ -1,32 +1,29 @@
 app.component('quizsContent', {
-    controller: function quizsContentController($scope, $interval, $rootScope, SubjectService, QuizService, $routeParams, $document, $location) {
+    controller: function quizsContentController(StudentService, $interval, $rootScope, SubjectService, QuizService, $routeParams, SessionService, $location, Util) {
 
         let ctrl = this;
-        var myLocalStorage = new MyLocalStorage("testInfo");
-
-        ctrl.step = 1;
+        const myLocalStorage = new MyLocalStorage("testInfo");
+        const mySessionStorage = SessionService.create('user');
         ctrl.timer = {};
-        let quizNumber = 10;
+
 
         (function init() {
-            var isExistsStorage = myLocalStorage.isPresent();
             var testInfo;
             ctrl.index = 0;
             ctrl.myAnswers = [];
             ctrl.timer.value = 5 * 60;
-            if (isExistsStorage) {
+            if (!myLocalStorage.isPresent()) {
+                loadQuestions();
+            } else {
                 testInfo = myLocalStorage.get();
                 ctrl.questions = [...testInfo.questions];
                 ctrl.index = testInfo.index;
                 ctrl.myAnswers = [...testInfo.myAnswers];
                 ctrl.timer.value = testInfo.time;
                 myLocalStorage.clear();
-            } else {
-                loadQuestions();
             }
         })();
 
-        ctrl.maxIndex = quizNumber - ctrl.step;
         for (let i = 0; i < $rootScope.account.subjects.length; i++) {
             let subject = $rootScope.account.subjects[i];
             if (subject.Id == $routeParams.id) {
@@ -59,10 +56,18 @@ app.component('quizsContent', {
             $interval.cancel(intervalCountdown);
         };
 
+        let quizNumber = 10;
+        ctrl.step = 1;
+        ctrl.maxIndex = quizNumber - ctrl.step;
         // Lấy quizs theo môn học
         function loadQuestions() {
             QuizService.getQuizsBy($routeParams.id).then((response) => {
-                ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();
+                // ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();
+                ctrl.questions = Util.getRandomElementInArray(response.data, 10);
+                ctrl.questions.forEach(question => {
+                    let newAnswers = Util.getRandomElementInArray(question.Answers, question.Answers.length);
+                    question.Answers = newAnswers;
+                });
                 $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
             });
         }
@@ -74,24 +79,7 @@ app.component('quizsContent', {
 
         ctrl.hasPrev = () => {
             return ctrl.index > 0;
-        };
-
-        ctrl.first = () => {
-            ctrl.index = 0;
-            $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
-        };
-
-        ctrl.last = () => {
-            ctrl.index = ctrl.maxIndex;
-            $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
-        };
-
-        ctrl.prev = () => {
-            if (ctrl.hasPrev()) {
-                ctrl.index -= ctrl.step;
-                $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
-            }
-        };
+        }
 
         ctrl.next = () => {
             if (ctrl.hasNext()) {
@@ -100,28 +88,36 @@ app.component('quizsContent', {
             }
         };
 
+        ctrl.prev = () => {
+            if (ctrl.hasPrev()) {
+                ctrl.index -= ctrl.step;
+                $rootScope.setTitle(ctrl.questions[ctrl.index].Text);
+            }
+        }
+
         // finish test
         ctrl.finish = function () {
             ctrl.subject.testInfo = QuizService.getInfoTest(ctrl.myAnswers, ctrl.questions);
             ctrl.subject.testInfo.endTime = new Date();
             $rootScope.account.subjects.push(ctrl.subject);
+            mySessionStorage.save($rootScope.account);
+            StudentService.updateStudent(angular.copy($rootScope.account));
         };
 
         ctrl.$onDestroy = function destroy() {
-            var newPath = $location.path();
             var testInfo = {};
             testInfo.time = ctrl.timer.value;
             testInfo.questions = [...ctrl.questions];
             testInfo.myAnswers = [...ctrl.myAnswers];
             testInfo.index = ctrl.index;
             myLocalStorage.save(testInfo);
+
             if (ctrl.timer.value > 0 && !confirm("Bạn đang làm bài kiểm tra, nếu rời khỏi hệ thống sẽ tính điểm !\nBạn có muốn thoát hay không ? ")) {
                 $location.path(`/test/${ctrl.subject.Id}`);
             } else {
                 stopCountDown();
                 myLocalStorage.clear();
                 ctrl.finish();
-                $location.path(newPath);
             }
         };
     },

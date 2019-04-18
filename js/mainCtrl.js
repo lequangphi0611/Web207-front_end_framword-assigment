@@ -1,14 +1,13 @@
-app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentService, $window) => {
+app.controller("mainCtrl", ($rootScope, $scope, $http, SessionService, StudentService, $window) => {
 
     $rootScope.title = "Online Training";
     $rootScope.key = {};
 
-    var storageUser = new Storage("user", null);
+    var storageUser = SessionService.create("user");
 
     $rootScope.setTitle = (name) => {
         $rootScope.title = name;
     };
-
 
     if (storageUser.isPresent()) {
         $rootScope.account = storageUser.get();
@@ -17,9 +16,11 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
             let firstName = fullname.substring(fullname.lastIndexOf(" "));
             return firstName;
         };
-        $rootScope.account.subjects = [];
+        if (!$rootScope.account.subjects) {
+            $rootScope.account.subjects = [];
+        }
         $rootScope.account.hasTested = (subjectId) => {
-            let subjects = [...$rootScope.account.subjects];
+            let subjects = $rootScope.account.subjects;
             for (let i = 0; i < subjects.length; i++) {
                 if (subjectId == subjects[i].Id) {
                     return true;
@@ -27,9 +28,9 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SubjectService, StudentSe
             }
             return false;
         };
-        $rootScope.account.getTotalScores = function() {
+        $rootScope.account.getTotalScores = function () {
             var sumScores = $rootScope.account.marks = 0;
-            if($rootScope.account.subjects.length > 0) {
+            if ($rootScope.account.subjects.length > 0) {
                 $rootScope.account.subjects.forEach(subject => {
                     sumScores += subject.testInfo.totalScores;
                 });
