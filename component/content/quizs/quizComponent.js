@@ -63,7 +63,6 @@ app.component('quizsContent', {
         // Lấy quizs theo môn học
         function loadQuestions() {
             QuizService.getQuizsBy($routeParams.id).then((response) => {
-                // ctrl.questions = new shuffleArray(response.data).limit(quizNumber).get();
                 ctrl.questions = Util.getRandomElementInArray(response.data, 10);
                 ctrl.questions.forEach(question => {
                     let newAnswers = Util.getRandomElementInArray(question.Answers, question.Answers.length);

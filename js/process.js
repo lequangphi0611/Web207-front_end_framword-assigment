@@ -33,35 +33,6 @@ function changeBackgroundImg() {
     }
 }
 
-function shuffleArray(args) {
-    this.maxLength = args.length - 1;
-    this.result = [];
-
-    this.limit = (value) => {
-        if (value <= args.length) {
-            this.maxLength = value - 1;
-        }
-        return this;
-    };
-
-    this.process = () => {
-        let temp = [...args];
-        for (let i = this.maxLength; i >= 0;) {
-            let indexRandom = Math.floor(Math.random() * temp.length);
-            if (temp[indexRandom]) {
-                this.result.push(temp[indexRandom]);
-                temp.splice(indexRandom, 1);
-                i--;
-            }
-        }
-    };
-
-    this.get = () => {
-        this.process();
-        return this.result;
-    };
-};
-
 function active(input) {
     input.classList.add("active");
 };
