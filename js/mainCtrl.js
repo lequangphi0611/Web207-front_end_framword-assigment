@@ -28,16 +28,6 @@ app.controller("mainCtrl", ($rootScope, $scope, $http, SessionService, StudentSe
             }
             return false;
         };
-        $rootScope.account.getTotalScores = function () {
-            var sumScores = $rootScope.account.marks = 0;
-            if ($rootScope.account.subjects.length > 0) {
-                $rootScope.account.subjects.forEach(subject => {
-                    sumScores += subject.testInfo.totalScores;
-                });
-                $rootScope.account.marks = sumScores / $rootScope.account.subjects.length;
-            }
-            return $rootScope.account.marks;
-        }
     };
 
     $rootScope.isLogin = () => {

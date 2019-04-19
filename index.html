@@ -1,165 +1,129 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="mApp">
-  <head>
-    <title>{{ title }}</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- logo -->
-    <link rel="shortcut icon" type="image/x-icon" href="/logofpt.ico" />
+<head>
+  <title>{{ title }}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/all.min.css" />
+  <!-- logo -->
+  <link rel="shortcut icon" type="image/x-icon" href="/logofpt.ico" />
 
-    <!-- my style -->
-    <link rel="stylesheet" href="/css/myStyle.css" />
-  </head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/all.min.css" />
 
-  <body ng-controller="mainCtrl">
-    <div class="container col-xl-10 col-12 col-12 m-content w-100">
-      <!-- header -->
-      <header class="m-header"></header>
+  <!-- my style -->
+  <link rel="stylesheet" href="/css/myStyle.css" />
+</head>
 
-      <!-- Menu -->
-      <nav class="navbar navbar-expand-md navbar-light bg-light col-12 m-nav">
-        <a class="navbar-brand" href="#!/">FPT Polytechnic</a>
-        <button
-          class="navbar-toggler d-lg-none"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapsibleNavId"
-          aria-controls="collapsibleNavId"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
-            <li class="nav-item">
-              <a class="nav-link align-middle" href="#"
-                >Giới thiệu <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Liên hệ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Góp ý</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Hỏi đáp</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="dropdownId"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span ng-if="isLogin()">
-                  <i class="fas fa-user"></i> {{ account.getFirstName() }}
-                </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="#!register" ng-show="!isLogin()"
-                  >Đăng ký</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="/templates/login.html"
-                  ng-show="!isLogin()"
-                  >Đăng nhập</a
-                >
-                <!-- <div class="dropdown-divider" ng-show="isLogin()"></div> -->
-                <a class="dropdown-item" href="#!edit/profile" ng-show="isLogin()"
-                  >Cập nhật tài khoản</a
-                >
-                <a class="dropdown-item" href="#" ng-show="isLogin()"
-                  >Đổi mật khẩu</a
-                >
-                <a class="dropdown-item" href="#!profile" ng-show="isLogin()"
-                  >Thông tin</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  ng-click="logOut()"
-                  ng-show="isLogin()"
-                  >Đăng xuất</a
-                >
-              </div>
-            </li>
-          </ul>
+<body ng-controller="mainCtrl">
+  <div class="container col-xl-10 col-12 col-12 m-content w-100">
+    <!-- header -->
+    <header class="m-header"></header>
+
+    <!-- Menu -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light col-12 m-nav">
+      <a class="navbar-brand" href="#!/">FPT Polytechnic</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link align-middle" href="#">Giới thiệu <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Góp ý</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hỏi đáp</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mt-2 mt-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <span ng-if="isLogin()">
+                <i class="fas fa-user"></i> {{ account.getFirstName() }}
+              </span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="#!register" ng-show="!isLogin()">Đăng ký</a>
+              <a class="dropdown-item" href="/templates/login.html" ng-show="!isLogin()">Đăng nhập</a>
+              <!-- <div class="dropdown-divider" ng-show="isLogin()"></div> -->
+              <a class="dropdown-item" href="#!edit/profile" ng-show="isLogin()">Cập nhật tài khoản</a>
+              <a class="dropdown-item" href="#!profile" ng-show="isLogin()">Thông tin</a>
+              <a class="dropdown-item" href="#" ng-click="logOut()" ng-show="isLogin()">Đăng xuất</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="col-12 mt-4 m-box">
+      <div class="row">
+        <!-- content left -->
+        <div class="container col-9 m-box-left">
+          <ng-view></ng-view>
         </div>
-      </nav>
 
-      <!-- Content -->
-      <div class="col-12 mt-4 m-box">
-        <div class="row">
-          <!-- content left -->
-          <div class="container col-9 m-box-left">
-            <ng-view></ng-view>
-          </div>
-
-          <!-- content right -->
-          <div class="col-3  m-box-right mb-4">
-            <side-bar class="p-0"></side-bar>
-          </div>
+        <!-- content right -->
+        <div class="col-3  m-box-right mb-4">
+          <side-bar class="p-0"></side-bar>
         </div>
       </div>
-
-      <!-- footer -->
-      <footer class="page-footer font-small">
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">
-          © 2018 Copyright: Quang Phi
-        </div>
-        <!-- Copyright -->
-      </footer>
-      <!-- Footer -->
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
 
-    <!-- font awesome -->
-    <script src="/js/all.min.js"></script>
+    <!-- footer -->
+    <footer class="page-footer font-small">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        © 2018 Copyright: Quang Phi
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/js/jquery.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
 
-    <!-- My JS -->
-    <script src="/js/process.js"></script>
+  <!-- font awesome -->
+  <script src="/js/all.min.js"></script>
 
-    <!-- Angular JS -->
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/angular-route.min.js"></script>
+  <!-- My JS -->
+  <script src="/js/process.js"></script>
 
-    <!-- App AngularJS -->
-    <script src="/js/app.js"></script>
+  <!-- Angular JS -->
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/angular-route.min.js"></script>
 
-    <!-- Ctrl -->
-    <script src="/js/mainCtrl.js"></script>
+  <!-- App AngularJS -->
+  <script src="/js/app.js"></script>
 
-    <script src="/component/sidebar/sidebarCombonent.js"></script>
-    <script src="/component/content/subject/subjectComponent.js"></script>
-    <script src="/component/content/quizs/quizComponent.js"></script>
-    <script src="/component/content//quizs/start-quiz/startsQuizComponent.js"></script>
-    <script src="/component/content/quizs/end-quiz/endQuizComponent.js"></script>
-    <script src="/component/content/profile/profileComponent.js"></script>
-    <script src="/component/content/register/registerComponent.js"></script>
-    <script src="/component/content/update-profile/updateProfileComponent.js"></script>
+  <!-- Ctrl -->
+  <script src="/js/mainCtrl.js"></script>
 
-    <!-- router -->
-    <script src="/router.js"></script>
-  </body>
+  <script src="/component/sidebar/sidebarCombonent.js"></script>
+  <script src="/component/content/subject/subjectComponent.js"></script>
+  <script src="/component/content/quizs/quizComponent.js"></script>
+  <script src="/component/content//quizs/start-quiz/startsQuizComponent.js"></script>
+  <script src="/component/content/quizs/end-quiz/endQuizComponent.js"></script>
+  <script src="/component/content/profile/profileComponent.js"></script>
+  <script src="/component/content/register/registerComponent.js"></script>
+  <script src="/component/content/update-profile/updateProfileComponent.js"></script>
+
+  <!-- router -->
+  <script src="/router.js"></script>
+</body>
+
 </html>

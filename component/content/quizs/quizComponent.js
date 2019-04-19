@@ -31,12 +31,13 @@ app.component('quizsContent', {
                 return;
             }
         }
+
         // lấy môn học từ url param
         ctrl.subject = SubjectService.findSubjectsBySubjectId($routeParams.id);
 
         var intervalCountdown;
 
-        function countdown() {
+        var countdown = () => {
             let minuteAndSecond = getMinutesAndSeconds(ctrl.timer.value);
             ctrl.timer.minutes = minuteAndSecond.minutes;
             ctrl.timer.seconds = minuteAndSecond.seconds;
@@ -105,6 +106,7 @@ app.component('quizsContent', {
         };
 
         ctrl.$onDestroy = function destroy() {
+            console.log("destroy");
             var testInfo = {};
             testInfo.time = ctrl.timer.value;
             testInfo.questions = [...ctrl.questions];
