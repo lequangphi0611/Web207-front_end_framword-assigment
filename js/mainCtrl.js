@@ -1,4 +1,4 @@
-app.controller("mainCtrl", ($rootScope, $scope, $http, SessionService, StudentService, $window) => {
+app.controller("mainCtrl", ($rootScope, $scope, SessionService, $window) => {
 
     $rootScope.title = "Online Training";
     $rootScope.key = {};

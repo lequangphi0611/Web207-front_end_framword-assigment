@@ -4,18 +4,15 @@ app
         controller: updateProfileController
     });
 
-function updateProfileController($rootScope, $location, SessionService, StudentService, $window) {
+function updateProfileController($rootScope, SessionService, StudentService) {
 
     this.account = angular.copy($rootScope.account);
     const session = SessionService.create("user");
 
     this.save = () => {
+        $rootScope.account = angular.copy(this.account);
         StudentService.updateStudent(this.account);
         session.save(this.account);
         this.success = true;
-    };
-
-    this.$onDestroy = function() {
-        $window.location.reload();
     };
 };
